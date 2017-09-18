@@ -6,7 +6,9 @@ def gaussJordan(myMatrix):
     return mInv
 
 
-def lookMax(A, n):
+def gauss(A):
+    n = len(A)
+
     for i in range(0, n):
         # Se busca el maximo elemento dentro de la matriz, así como la fila pertenicente a este elemento
         maxElement = abs(A[i][i])
@@ -15,17 +17,11 @@ def lookMax(A, n):
             if abs(A[k][i]) > maxElement:
                 maxElement = abs(A[k][i])
                 maxRow = k
-
-        swapMax(A, maxRow, i)
-
-def swapMax(A,maxRow, i):
     # Se hace un swap de la fila máxima por la fila actual(dejando la matriz en la forma Escalonada)
     for k in range(i, n + 1):
         tmp = A[maxRow][k]
         A[maxRow][k] = A[i][k]
         A[i][k] = tmp
-
-def reduceMatrix(A, i):
     # Todas las filas debajo o encima del pivote, deben quedar igualadas a 0, dejando la matriz de forma reducida escalonada
     for k in range(i + 1, n):
         c = -A[k][i] / A[i][i]
@@ -35,8 +31,6 @@ def reduceMatrix(A, i):
             else:
                 A[k][j] += c * A[i][j]
 
-def gauss(A):
-    n = len(A)
 
     # Solve equation Ax=b for an upper triangular matrix A
     x = [0 for i in range(n)]
